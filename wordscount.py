@@ -35,8 +35,12 @@ for i in range(1, len(word_list)):
     # 去除标点符号
     if word_list[i] in punctuation or word_list[i-1] in punctuation:
         continue
-    if word_list[i] in punctuation or word_list[i-1] in string.punctuation:
+    if word_list[i] in string.punctuation or word_list[i-1] in string.punctuation:
         continue
+    # 去除中文破折号“——”
+    if word_list[i] =="—" or word_list[i-1] == "—":
+        continue
+
     # 限定长度大于1，过滤单个字和标点符号
     # if len(word_list[i-1]) >1 and len(word_list[i])>1:
     word2_str = word_list[i-1] +" "+ word_list[i]
