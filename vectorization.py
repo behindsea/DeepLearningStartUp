@@ -8,9 +8,7 @@ def cut_negative(f):
 
 
 flo_arr = numpy.random.normal(0.0,1.0,100)
-
 print(flo_arr)
 
 vec_fun = numpy.vectorize(cut_negative)
-
 print(vec_fun(flo_arr))
