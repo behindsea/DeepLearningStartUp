@@ -1,10 +1,15 @@
 from collections import Counter
 from zhon.hanzi import punctuation
 import string
-
+import jieba
 
 with open('happiness_seg.txt', 'r', encoding="utf-8") as words_fr:
-    word_list = words_fr.read().split()
+    content = words_fr.read().replace(" ","").replace('\n',"")
+    word_list = jieba.lcut(content,cut_all = False)
+    # word_list = words_fr.read().split()
+#
+# with open('happiness.txt','w', encoding='utf-8') as cont_fw:
+#     cont_fw.write(content)
 
 print("总词数：",len(word_list))
 print("词类数：",len(set(word_list)))
@@ -33,12 +38,12 @@ with open('word1_count.txt','w', encoding='utf-8') as word1_fw:
 word2_dic = {}
 for i in range(1, len(word_list)):
     # 去除标点符号
+    if word_list[i] == "―" or word_list[i-1] == "―":
+        # print("#")
+        continue
     if word_list[i] in punctuation or word_list[i-1] in punctuation:
         continue
     if word_list[i] in string.punctuation or word_list[i-1] in string.punctuation:
-        continue
-    # 去除中文破折号“——”
-    if word_list[i] =="—" or word_list[i-1] == "—":
         continue
 
     # 限定长度大于1，过滤单个字和标点符号
